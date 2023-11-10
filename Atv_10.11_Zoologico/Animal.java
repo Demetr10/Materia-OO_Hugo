@@ -36,6 +36,8 @@ public abstract class Animal {
 
     public abstract void emitirSom();
 
+    public abstract void correr();
+
     public String gerarDetalhes() {
         return "Nome: " + nome + " | Idade: " + idade + " | Peso: " + peso;
     }

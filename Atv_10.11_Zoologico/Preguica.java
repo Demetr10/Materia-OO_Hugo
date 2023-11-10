@@ -6,11 +6,14 @@ public class Preguica extends Animal {
 
     @Override
     public void emitirSom() {
-        System.out.println("Uai, uai");
+        System.out.println("BELIGOOOOOOOOO,BELIGOOOOOOOOO");
     }
 
     @Override
     public void correr() {
         System.out.println("A preguiça está escalando uma árvore");
+    }
+
+    public void escalarArvore() {
     }
 }

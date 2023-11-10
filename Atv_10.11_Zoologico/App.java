@@ -73,6 +73,8 @@ public class App {
                     zoológico.invocarEmitirSom();
                     break;
                 case 5:
+                    // System.out.println("Informe o nome do animal:");
+                    // String nomeAnimal = ler.nextLine();
                     zoológico.invocarCorrer();
                     break;
                 case 0:
