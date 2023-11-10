@@ -35,7 +35,7 @@ public class App {
 
             System.out.println(menu());
             opcao = ler.nextInt();
-            ler.nextLine();
+            // ler.nextLine();
 
             switch (opcao) {
                 case 1:
