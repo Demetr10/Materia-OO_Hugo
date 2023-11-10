@@ -16,6 +16,9 @@ public class App {
         return str;
     }
 
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         // public App() {
         ler = new Scanner(System.in);
@@ -26,6 +29,7 @@ public class App {
 
         // public void executar() {
 
+            // int tipo;
         do {
 
             System.out.println(menu());
@@ -34,6 +38,7 @@ public class App {
 
             switch (opcao) {
                 case 1:
+                ler.nextLine();
                     System.out.println("Informe o nome do animal:");
                     String nome = System.console().readLine();
                     System.out.println("Informe a idade do animal:");
@@ -46,9 +51,10 @@ public class App {
                     System.out.println("2. Leão");
                     System.out.println("3. Preguiça");
 
-                    int tipo = Integer.parseInt(System.console().readLine());
-                    opcao = ler.nextInt();
-
+                    int tipo = ler.nextInt();
+                    // Integer.parseInt(System.console().readLine());
+                    // opcao = ler.nextInt();
+                do{
                     switch (tipo) {
                         case 1:
                             zoológico.cadastrar(new Cavalo(nome, idade, peso));
@@ -59,8 +65,12 @@ public class App {
                         case 3:
                             zoológico.cadastrar(new Preguica(nome, idade, peso));
                             break;
+                            default:   System.out.println("opção inválida!");
+                            break;
                     }
-                    break;
+                }    while (tipo < 1 || tipo > 3);
+                break;
+                    // break;
                 case 2:
                     System.out.println(zoológico.listarAnimais());
                     break;
