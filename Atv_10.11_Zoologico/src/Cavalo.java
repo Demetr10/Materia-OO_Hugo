@@ -1,3 +1,4 @@
+package src;
 public class Cavalo extends Animal {
 
     public Cavalo(String nome, double idade, double peso) {

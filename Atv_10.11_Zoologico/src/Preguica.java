@@ -1,3 +1,4 @@
+package src;
 public class Preguica extends Animal {
 
     public Preguica(String nome, double idade, double peso) {
