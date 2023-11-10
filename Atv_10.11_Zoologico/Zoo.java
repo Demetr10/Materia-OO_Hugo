@@ -39,6 +39,31 @@ public class Zoo {
         }
     }
 
+    public void invocarCorrer(String nome) {
+        for (Animal animal : animais) {
+            if (animal.getNome().equals(nome)) {
+                if (animal instanceof Cavalo) {
+                    Cavalo cavalo = (Cavalo) animal;
+                    cavalo.correr();
+
+                } else {
+                    if (animal instanceof Leão) {
+                        Leão Leão = (Leão) animal;
+                        Leão.correr();
+                    } else {
+                        if (animal instanceof Preguica) {
+                            Preguica preguica = (Preguica) animal;
+                            preguica.escalarArvore();
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+
+    }
     // public void invocarCorrer() {
     // for (Animal animal : this.animais) {
     // if (animal instanceof Cavalo || animal instanceof Leão) {

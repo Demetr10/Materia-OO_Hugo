@@ -4,27 +4,33 @@ public class App {
     private static Scanner ler;
     private static Zoo zoológico;
 
+    private static String menu() {
+        String str = "";
+        System.out.println("Menu:");
+        System.out.println("1. Cadastrar animal");
+        System.out.println("2. Listar animais");
+        System.out.println("3. Contar animais por tipo");
+        System.out.println("4. Fazer todos os animais emitirem som");
+        System.out.println("5. Fazer os cavalos e os leões correrem");
+        System.out.println("9. Sair");
+        return str;
+    }
+
     public static void main(String[] args) {
         // public App() {
         ler = new Scanner(System.in);
+        zoológico = new Zoo();
+        int opcao = 0;
+
         // this.zoológico = new Zoo();
 
         // public void executar() {
 
         do {
-            int opcao;
 
-            // System.out.println(menu());
-            // opcao = scan.nextInt();
-            // scan.nextLine();
-
-            System.out.println("Menu:");
-            System.out.println("1. Cadastrar animal");
-            System.out.println("2. Listar animais");
-            System.out.println("3. Contar animais por tipo");
-            System.out.println("4. Fazer todos os animais emitirem som");
-            System.out.println("5. Fazer os cavalos e os leões correrem");
-            System.out.println("9. Sair");
+            System.out.println(menu());
+            opcao = ler.nextInt();
+            ler.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -66,9 +72,9 @@ public class App {
                 case 4:
                     zoológico.invocarEmitirSom();
                     break;
-                // case 5:
-                // zoológico.invocarCorrer();
-                // break;
+                case 5:
+                    zoológico.invocarCorrer();
+                    break;
                 case 0:
                     System.out.println("Até a próxima!");
                     break;

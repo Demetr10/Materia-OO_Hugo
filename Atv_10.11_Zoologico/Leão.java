@@ -9,8 +9,8 @@ public class Leão extends Animal {
         System.out.println("Rrrrrrr");
     }
 
-    // @Override
-    // public void correr() {
-    // System.out.println("O cavalo está correndo");
-    // }
+    @Override
+    public void correr() {
+        System.out.println("O cavalo está correndo");
+    }
 }
