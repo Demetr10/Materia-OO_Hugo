@@ -18,7 +18,35 @@
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
 
-  <dependencies>
+    <repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
+    
+    <dependencies>
+
+    <dependency>
+            <groupId>com.github.hugoperlin</groupId>
+            <artifactId>results</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+
+<dependency>
+    <groupId>io.github.cdimascio</groupId>
+    <artifactId>dotenv-java</artifactId>
+    <version>2.2.4</version>
+</dependency>
+
+<dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.30</version>
+    </dependency>
+
     <dependency>
       <groupId>io.pebbletemplates</groupId>
       <artifactId>pebble</artifactId>
@@ -30,16 +58,18 @@
       <artifactId>javalin</artifactId>
       <version>5.6.3</version>
     </dependency>
+
     <dependency>
       <groupId>io.javalin</groupId>
       <artifactId>javalin-rendering</artifactId>
       <version>5.6.2</version>
-  </dependency>
-  <dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-simple</artifactId>
-    <version>1.7.25</version>
-  </dependency>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.25</version>
+    </dependency>
   </dependencies>
 
   <build>
