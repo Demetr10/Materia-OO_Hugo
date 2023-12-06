@@ -5,10 +5,12 @@ import java.util.List;
 
 import com.github.hugoperlin.results.Resultado;
 
-import ifpr.pgua.eic.tads.contatos.model.Lanche;
+import ifpr.pgua.eic.tads.contatos.model.entities.Lanche;
 
 public interface LancheDAO {
     Resultado<Lanche> criar(Lanche lanche);
 
-    List<Lanche> listar();
+    Resultado<List<Lanche>> listar();
+
+    // LancheRepository buscar(int int1);
 }

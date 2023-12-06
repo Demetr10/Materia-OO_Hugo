@@ -1,50 +1,13 @@
-
 package ifpr.pgua.eic.tads.contatos.model.repositories;
 
-public class PedidoRepository {
+import java.util.List;
 
-    private int id;
-    private String observacao;
-    private BebidaRepository bebida;
-    private LancheRepository lanche;
+import com.github.hugoperlin.results.Resultado;
 
-    public PedidoRepository(int id, String observacao, BebidaRepository bebida, LancheRepository lanche) {
-        this.id = id;
-        this.observacao = observacao;
-        this.bebida = bebida;
-        this.lanche = lanche;
-    }
+import ifpr.pgua.eic.tads.contatos.model.entities.Pedido;
 
-    public int getId() {
-        return id;
-    }
+public interface PedidoRepository {
+    Resultado<Pedido> cadastrar(String observacao, int id_lanche, int id_bebida);
 
-    public String getObservacao() {
-        return observacao;
-    }
-
-    public BebidaRepository getBebida() {
-        return bebida;
-    }
-
-    public LancheRepository getLanche() {
-        return lanche;
-    }
-
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
-
-    public void setBebida(BebidaRepository bebida) {
-        this.bebida = bebida;
-    }
-
-    public void setLanche(LancheRepository lanche) {
-        this.lanche = lanche;
-    }
-
-    public String toString() {
-        return "PedidoRepository [ID: " + id + ", Observação: " + observacao +
-                ", Bebida: " + bebida + ", Lanche: " + lanche + "]";
-    }
+    Resultado<List<Pedido>> listar();
 }

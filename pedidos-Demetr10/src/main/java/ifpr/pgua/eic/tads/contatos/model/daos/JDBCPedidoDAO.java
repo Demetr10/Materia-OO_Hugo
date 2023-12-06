@@ -2,16 +2,17 @@ package ifpr.pgua.eic.tads.contatos.model.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.github.hugoperlin.results.Resultado;
 
-import ifpr.pgua.eic.tads.contatos.model.FabricaConexoes;
-import ifpr.pgua.eic.tads.contatos.model.Pedido;
+import ifpr.pgua.eic.tads.contatos.model.entities.FabricaConexoes;
+import ifpr.pgua.eic.tads.contatos.model.entities.Pedido;
 
 public class JDBCPedidoDAO implements PedidoDAO {
-
     private FabricaConexoes fabricaConexoes;
 
     public JDBCPedidoDAO(FabricaConexoes fabricaConexoes) {
@@ -19,26 +20,50 @@ public class JDBCPedidoDAO implements PedidoDAO {
     }
 
     @Override
-    public Resultado<Pedido> criar(Pedido Pedido) {
+    public Resultado<Pedido> criar(Pedido pedido) {
         try {
             Connection con = fabricaConexoes.getConnection();
-            PreparedStatement pstm = con.prepareStatement("INSERT INTO Pedidos (nome, valor) VALUES (?, ?)");
+            PreparedStatement pstm = con
+                    .prepareStatement("INSERT INTO pedidos (observacao, id_bebida, id_lanche) VALUES (?, ?, ?)");
 
-            pstm.setString(1, Pedido.getNome());
-            pstm.setDouble(2, Pedido.getValor());
+            pstm.setString(1, pedido.getObservacao());
+            pstm.setInt(2, pedido.getBebida());
+            pstm.setInt(3, pedido.getLanche());
 
             pstm.executeUpdate();
 
             con.close();
-            return Resultado.sucesso("Pedido cadastrada com sucesso", Pedido);
+            return Resultado.sucesso("Pedido cadastrado com sucesso", pedido);
         } catch (SQLException e) {
-            return Resultado.erro("Erro ao cadastrar Pedido: " + e.getMessage());
+            return Resultado.erro("Erro ao cadastrar pedido: " + e.getMessage());
         }
     }
 
     @Override
-    public List<Pedido> listar() {
-        // Implemente a lógica para listar as bebidas do banco de dados
-        return null;
+    public Resultado<List<Pedido>> listar() {
+        List<Pedido> pedidos = new ArrayList<>();
+
+        try {
+            Connection con = fabricaConexoes.getConnection();
+            PreparedStatement pstm = con.prepareStatement("SELECT * FROM pedidos");
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String observacao = rs.getString("observacao");
+                int id_bebida = rs.getInt("id_bebida");
+                int id_lanche = rs.getInt("id_lanche");
+
+                Pedido pedido = new Pedido(id, observacao, id_bebida, id_lanche);
+
+                pedidos.add(pedido);
+            }
+
+            con.close();
+            return Resultado.sucesso("Pedidos carregados", pedidos);
+        } catch (SQLException e) {
+            return Resultado.erro("Problema ao fazer seleção!! " + e.getMessage());
+        }
     }
 }

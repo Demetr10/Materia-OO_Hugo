@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.github.hugoperlin.results.Resultado;
 
-import ifpr.pgua.eic.tads.contatos.model.Bebida;
+import ifpr.pgua.eic.tads.contatos.model.entities.Bebida;
 
 public interface BebidaDAO {
     Resultado<Bebida> criar(Bebida bebida);
 
-    List<Bebida> listar();
+    Resultado<List<Bebida>> listar();
+
+    // BebidaRepository buscar(int int1);
 }
-0

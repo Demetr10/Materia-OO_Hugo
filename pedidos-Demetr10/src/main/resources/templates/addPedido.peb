@@ -1,0 +1,59 @@
+<!-- <!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ver Pedido</title>
+</head>
+
+<body>
+    <h1> Ver Pedido </h1>
+    <form action="/Bebida/add" method="post">
+        <label for="Observacao">Observacao Pedido:</label>
+        <input type="text" name="Observacao" id="Observacao" /><br /><br />
+
+        {% for item in model.listabebidas %}
+            <li> {{ item }} </li>
+        {% endfor %}
+
+        <select name="id_lanche">
+            <option value="valor1">Valor 1</option>
+            <option value="valor2" selected>Valor 2</option>
+            <option value="valor3">Valor 3</option>
+        </select>
+        <input type="submit" value="Adicionar" />
+    </form>
+</body>
+
+</html> -->
+
+
+{% extends "templates/base.peb" %}
+{% block content %}
+{% if resultado != null %}
+    {{resultado.getMsg}}
+{% endif %}
+
+<h1>Cadastrar Pedido</h1>
+<form method="post" action="/addBebida.peb">
+    <label for="bebida">CBebida:</label>
+    <select name="bebida" id="bebida" value="{{id_bebida}}">
+        {% for bebida in bebidas%}
+            <option value="{{id_bebida}}" 
+            {% if id_bebida == id_bebida %}
+            selected
+            {% endif %}
+            >{{bebida.titulo}}</option>
+        {% endfor %}
+    </select>
+
+
+    
+    <input type="submit" />
+</form>
+
+<button>
+    <a href="/">Voltar</a>
+</button>
+{% endblock %}

@@ -3,14 +3,15 @@ package ifpr.pgua.eic.tads.contatos.model.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.github.hugoperlin.results.Resultado;
 
-import ifpr.pgua.eic.tads.contatos.model.FabricaConexoes;
-// import ifpr.pgua.eic.tads.contatos.model.repositories.Lanche;
-import ifpr.pgua.eic.tads.contatos.model.Lanche;
+import ifpr.pgua.eic.tads.contatos.model.entities.FabricaConexoes;
+import ifpr.pgua.eic.tads.contatos.model.entities.Lanche;
 
 public class JDBCLancheDAO implements LancheDAO {
 
@@ -39,8 +40,29 @@ public class JDBCLancheDAO implements LancheDAO {
     }
 
     @Override
-    public List<Lanche> listar() {
-        // Implemente a lógica para poder criar a listar as bebidas do banco de dados
-        return null;
+    public Resultado<List<Lanche>> listar() {
+        ArrayList<Lanche> lista = new ArrayList<>();
+        try {
+            Connection con = fabricaConexoes.getConnection();
+            PreparedStatement pstm = con.prepareStatement("SELECT * FROM oo_lanches");
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id_lanche");
+                String nome = rs.getString("nome_lanche");
+                Double valor = rs.getDouble("valor_lanche");
+
+                Lanche lanche = new Lanche(id, nome, valor);
+
+                lista.add(lanche);
+            }
+            con.close();
+            return Resultado.sucesso("Contatos carregados", lista);
+        } catch (SQLException e) {
+            return Resultado.erro(e.getMessage());
+        }
+
     }
+
 }

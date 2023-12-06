@@ -7,8 +7,8 @@ import java.util.List;
 
 import com.github.hugoperlin.results.Resultado;
 
-import ifpr.pgua.eic.tads.contatos.model.Bebida;
-import ifpr.pgua.eic.tads.contatos.model.FabricaConexoes;
+import ifpr.pgua.eic.tads.contatos.model.entities.Bebida;
+import ifpr.pgua.eic.tads.contatos.model.entities.FabricaConexoes;
 
 public class JDBCBebidaDAO implements BebidaDAO {
 
@@ -37,7 +37,7 @@ public class JDBCBebidaDAO implements BebidaDAO {
     }
 
     @Override
-    public List<Bebida> listar() {
+    public Resultado<List<Bebida>> listar() {
         // Implemente a lógica para listar as bebidas do banco de dados
         return null;
     }
