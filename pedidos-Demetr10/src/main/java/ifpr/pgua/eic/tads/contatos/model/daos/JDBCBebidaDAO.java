@@ -2,17 +2,20 @@ package ifpr.pgua.eic.tads.contatos.model.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.github.hugoperlin.results.Resultado;
 
 import ifpr.pgua.eic.tads.contatos.model.entities.Bebida;
 import ifpr.pgua.eic.tads.contatos.model.entities.FabricaConexoes;
+import ifpr.pgua.eic.tads.contatos.model.entities.Pedido;
 
 public class JDBCBebidaDAO implements BebidaDAO {
 
-    private FabricaConexoes fabricaConexoes;
+    FabricaConexoes fabricaConexoes;
 
     public JDBCBebidaDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
@@ -22,7 +25,8 @@ public class JDBCBebidaDAO implements BebidaDAO {
     public Resultado<Bebida> criar(Bebida bebida) {
         try {
             Connection con = fabricaConexoes.getConnection();
-            PreparedStatement pstm = con.prepareStatement("INSERT INTO bebidas (nome, valor) VALUES (?, ?)");
+            PreparedStatement pstm = con
+                    .prepareStatement("INSERT INTO bebidas (nome_bebida, valor_bebida) VALUES (?, ?)");
 
             pstm.setString(1, bebida.getNome());
             pstm.setDouble(2, bebida.getValor());
@@ -38,7 +42,34 @@ public class JDBCBebidaDAO implements BebidaDAO {
 
     @Override
     public Resultado<List<Bebida>> listar() {
-        // Implemente a lógica para listar as bebidas do banco de dados
-        return null;
+        ArrayList<Bebida> lista = new ArrayList<>();
+        try {
+            Connection con = fabricaConexoes.getConnection();
+            PreparedStatement pstm = con.prepareStatement(
+                    "SELECT * from bebidas inner JOIN pedidos on bebidas.id_bebida=pedidos.id_bebida WHERE pedidos.id_pedido=?");
+
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id_bebida");
+                String nome = rs.getString("nome_bebida");
+                Double valor = rs.getDouble("valor_bebida");
+
+                Bebida bebida = new Bebida(id, nome, valor);
+
+                lista.add(bebida);
+            }
+            con.close();
+            return Resultado.sucesso("Bebida carregada", lista);
+        } catch (SQLException e) {
+            return Resultado.erro(e.getMessage());
+        }
+        // return null;
+    }
+
+    @Override
+    public Resultado<Bebida> buscarBebidaPedido(Pedido pedido) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'buscarBebidaPedido'");
     }
 }

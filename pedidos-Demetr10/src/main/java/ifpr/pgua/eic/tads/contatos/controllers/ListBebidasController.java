@@ -30,6 +30,6 @@ public class ListBebidasController {
 
         }
 
-        ctx.render("templates/listBebidas.peb");
+        ctx.render("templates/listBebidas.peb", model);
     };
 }

@@ -30,6 +30,6 @@ public class ListPedidoController {
 
         }
 
-        ctx.render("templates/listPedidos.html");
+        ctx.render("templates/listPedidos.peb");
     };
 }

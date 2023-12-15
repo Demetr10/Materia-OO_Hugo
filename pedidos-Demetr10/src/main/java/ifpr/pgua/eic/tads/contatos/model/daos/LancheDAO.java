@@ -6,6 +6,7 @@ import java.util.List;
 import com.github.hugoperlin.results.Resultado;
 
 import ifpr.pgua.eic.tads.contatos.model.entities.Lanche;
+import ifpr.pgua.eic.tads.contatos.model.entities.Pedido;
 
 public interface LancheDAO {
     Resultado<Lanche> criar(Lanche lanche);
@@ -13,4 +14,6 @@ public interface LancheDAO {
     Resultado<List<Lanche>> listar();
 
     // LancheRepository buscar(int int1);
+    Resultado<Lanche> buscarLanchePedido(Pedido pedido);
+
 }

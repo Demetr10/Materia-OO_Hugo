@@ -12,10 +12,11 @@ import com.github.hugoperlin.results.Resultado;
 
 import ifpr.pgua.eic.tads.contatos.model.entities.FabricaConexoes;
 import ifpr.pgua.eic.tads.contatos.model.entities.Lanche;
+import ifpr.pgua.eic.tads.contatos.model.entities.Pedido;
 
 public class JDBCLancheDAO implements LancheDAO {
 
-    private FabricaConexoes fabricaConexoes;
+    FabricaConexoes fabricaConexoes;
 
     public JDBCLancheDAO(FabricaConexoes fabricaConexoes) {
         this.fabricaConexoes = fabricaConexoes;
@@ -25,7 +26,8 @@ public class JDBCLancheDAO implements LancheDAO {
     public Resultado<Lanche> criar(Lanche lanche) {
         try {
             Connection con = fabricaConexoes.getConnection();
-            PreparedStatement pstm = con.prepareStatement("INSERT INTO bebidas (nome, valor) VALUES (?, ?)");
+            PreparedStatement pstm = con
+                    .prepareStatement("INSERT INTO lanches (nome_lanche, valor_lanche) VALUES (?, ?)");
 
             pstm.setString(1, lanche.getNome());
             pstm.setDouble(2, lanche.getValor());
@@ -33,9 +35,9 @@ public class JDBCLancheDAO implements LancheDAO {
             pstm.executeUpdate();
 
             con.close();
-            return Resultado.sucesso("Bebida cadastrada com sucesso", lanche);
+            return Resultado.sucesso("Lanche foi com sucesso", lanche);
         } catch (SQLException e) {
-            return Resultado.erro("Erro ao cadastrar bebida: " + e.getMessage());
+            return Resultado.erro("Erro ao cadastrar lanche: " + e.getMessage());
         }
     }
 
@@ -44,7 +46,7 @@ public class JDBCLancheDAO implements LancheDAO {
         ArrayList<Lanche> lista = new ArrayList<>();
         try {
             Connection con = fabricaConexoes.getConnection();
-            PreparedStatement pstm = con.prepareStatement("SELECT * FROM oo_lanches");
+            PreparedStatement pstm = con.prepareStatement("SELECT * FROM lanches");
 
             ResultSet rs = pstm.executeQuery();
 
@@ -58,11 +60,17 @@ public class JDBCLancheDAO implements LancheDAO {
                 lista.add(lanche);
             }
             con.close();
-            return Resultado.sucesso("Contatos carregados", lista);
+            return Resultado.sucesso("Lanches carregados", lista);
         } catch (SQLException e) {
             return Resultado.erro(e.getMessage());
         }
 
+    }
+
+    @Override
+    public Resultado<Lanche> buscarLanchePedido(Pedido pedido) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'buscarLanchePedido'");
     }
 
 }

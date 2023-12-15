@@ -45,17 +45,23 @@ public class JDBCPedidoDAO implements PedidoDAO {
 
         try {
             Connection con = fabricaConexoes.getConnection();
-            PreparedStatement pstm = con.prepareStatement("SELECT * FROM pedidos");
+            PreparedStatement pstm = con.prepareStatement(
+                    "SELECT * FROM pedidos inner join bebidas inner join lanches on pedidos.id_bebida = bebidas.id_bebida AND pedidos.id_lanche = lanches.id_lanche  \\r\\n"
+                            + //
+                            "\"\r\n" + //
+                            "                            + //\r\n" + //
+                            "                            \"ORDER BY `pedidos`.`id_pedido` ASC");
 
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String observacao = rs.getString("observacao");
-                int id_bebida = rs.getInt("id_bebida");
-                int id_lanche = rs.getInt("id_lanche");
 
-                Pedido pedido = new Pedido(id, observacao, id_bebida, id_lanche);
+                int bebida = rs.getInt("id_bebida");
+                int lanche = rs.getInt("id_lanche");
+
+                Pedido pedido = new Pedido(id, observacao, bebida, lanche);
 
                 pedidos.add(pedido);
             }

@@ -56,9 +56,11 @@ public class Pedido {
         this.id_lanche = id_lanche;
     }
 
-    @Override
-    public String toString() {
-        return "Número do pedido:" + id + " Bebida: " + id_bebida + "Lanche: " + id_lanche + " Observação: "
-                + observacao;
-    }
+    // @Override
+    // public String toString() {
+    // return "Número do pedido:" + id + " Bebida: " + id_bebida + "Lanche: " +
+    // id_lanche + " Observação: "
+    // + observacao;
+    // }
+    // }}
 }

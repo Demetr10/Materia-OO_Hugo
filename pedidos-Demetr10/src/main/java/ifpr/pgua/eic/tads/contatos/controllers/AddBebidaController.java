@@ -20,7 +20,7 @@ public class AddBebidaController {
 
     public Handler get = (Context ctx) -> {
 
-        ctx.render("templates/addBebida.html");
+        ctx.render("templates/addBebida.peb");
     };
 
     public Handler post = (Context ctx) -> {
@@ -37,6 +37,6 @@ public class AddBebidaController {
 
         }
 
-        ctx.render("templates/addBebida.html", model);
+        ctx.render("templates/addBebida.peb", model);
     };
 };
